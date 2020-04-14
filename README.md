@@ -6,7 +6,7 @@ First we setup a `SqlStreamer`:
 ```java
 final SqlStreamer streamer = SqlStreamer.of(ds.getConnection());
 ```
-Next we show how to do the most basic SQL query and process the results using a Java `Stream`. This returns a single row, so only one line of output.
+Next example shows, how to do a basic SQL query and process the results using a Java `Stream`. This example returns a single row, so only one line of output is produced, but of course as a stream its setup to handle any number of results.
 
 SQL:
 ```sql
@@ -15,7 +15,7 @@ SELECT 1 + 1;
 Java:
 ```java
 streamer.query()
-  .select(int.class, "1 + 1")
+ .select(int.class, "1 + 1")
  .forEach(System.out::println);
 ```
 Output:
