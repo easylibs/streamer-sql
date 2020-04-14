@@ -9,7 +9,7 @@ final SqlStreamer streamer = SqlStreamer.of(ds.getConnection());
 Next we show how to do the most basic SQL query and process the results using a Java `Stream`. This returns a single row, so only one line of output.
 
 SQL:
-```
+```sql
 SELECT 1 + 1;
 ```
 Java:
@@ -25,7 +25,7 @@ Output:
 
 This query selects all columns in table `t1` and also executes an SQL `AVG()` function to average the `score`:
 SQL:
-```
+```sql
 SELECT AVG(score), t1.* FROM t1 ...;
 ```
 Java:
@@ -36,7 +36,7 @@ streamer.query("t1")
 ```
 Lastly here is an example that shows how use a `PreparedStatement` query. The prepared statement can be reused over and over:
 SQL:
-```
+```sql
 SET @skip=1; SET @numrows=5;
 PREPARE STMT FROM 'SELECT * FROM tbl LIMIT ?, ?';
 EXECUTE STMT USING @skip, @numrows;
