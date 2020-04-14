@@ -30,7 +30,7 @@ Output:
 |:------:|--------------------------------------------------------------------------------------------------------|
 | 1      | creates a query backed by a `java.sql.Statement`|
 | 2      | adds a `select 1 + 1` clause to the query and `int.class` maps the `SelectStream` to an `Integer` type |
-| 3      | `Stream::forEach(Consumer<Integer> action)` which gets called with each row of the `ResultSet`|
+| 3      | `Stream::forEach(Consumer<Integer> action)` is called with each row of the `ResultSet` produced|
 
 Using Tuples
 ---
