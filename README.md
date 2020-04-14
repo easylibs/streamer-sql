@@ -4,8 +4,8 @@ Lightweight SQL to Java Stream API adaptor
 ## Examples
 First we setup a `SqlStreamer`:
 ```java
-final java.sql.DataSource ds = ...; // Assume injected in someway
-final SqlStreamer streamer = SqlStreamer.of(ds.getConnection());
+1| final java.sql.DataSource ds = ...; // Assume injected in someway
+2| final SqlStreamer streamer = SqlStreamer.of(ds.getConnection());
 ```
 This first example shows, how to do a basic SQL query and process the results using a Java `Stream`. This example returns a single row, so only one line of output is produced, but of course as a stream its setup to handle any number of results.
 
@@ -25,8 +25,18 @@ Output:
 ```
 2
 ```
-The example above
-This query selects all columns in table `t1` and also executes an SQL `AVG()` function to average the `score`:
+
+| Line # | Description                                                                                            |
+|:------:|--------------------------------------------------------------------------------------------------------|
+| 1      | creates a query backed by a `java.sql.Statement`|
+| 2      | adds a `select 1 + 1` clause to the query and `int.class` maps the `SelectStream` to an `Integer` type |
+| 3      | is `Stream::forEach(Consumer<Integer> action)` which gets called with each row of the `ResultSet`|
+
+Using Tuples
+---
+This query selects all columns in table `t1` and also executes an SQL `AVG()` function to average the `score`. By default
+if you do not map the `select` statement result as something else, the default will be a `Tuple` which can take any number
+of arbitrary arguments. Also specialized versions of tuples exist for different number of parameters such as `Tuple1`, `Tuple9`, etc..
 
 SQL:
 ```sql
@@ -39,6 +49,8 @@ Java:
 2|         .select("AVG(score)", "t1.*")
 3|         .forEach(System.out::println);
 ```
+---
+
 Lastly here is an example that shows how use a `PreparedStatement` query. The prepared statement can be reused over and over:
 
 SQL:
@@ -55,6 +67,7 @@ Java:
 3|         .build()    // Build a query statement
 4|         .prepare(); // Impl: Make it a java.sql.PreparedStatement
 ```
+---
 
 and now we use the prepared statement, supplying the values with `values(1, 5)` to replace all of the `?` in the query:
 
