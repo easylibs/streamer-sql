@@ -49,9 +49,10 @@ Java:
 2|         .select("AVG(score)", "t1.*")
 3|         .forEach(System.out::println);
 ```
+Prepared Query
 ---
 
-Lastly here is an example that shows how use a `PreparedStatement` query. The prepared statement can be reused over and over:
+Lastly here is an example that shows how use a `PreparedStatement` backed query. The prepared query can be reused over and over by supplying different values 
 
 SQL:
 ```sql
@@ -69,7 +70,9 @@ Java:
 ```
 ---
 
-and now we use the prepared statement, supplying the values with `values(1, 5)` to replace all of the `?` in the query:
+and now we use the prepared query by supplying the values with `values(1, 5)` to replace all of the `?` in the query. When the `.stream()` is called, the query is executed and the `Stream` returned will iterate over the returned `ResultSet`. 
+
+**Note** that `PrearedSqlQuery::stream` does not return the enhanced `QueryStream`, but the normal `java.util.stream.Stream` which does not allow the prepared query to be further customized.
 
 
 ```java
@@ -78,4 +81,5 @@ and now we use the prepared statement, supplying the values with `values(1, 5)` 
 3|         .forEach(System.out::println);
 ```
 
-For more example please check the Wiki pages.
+For more example please check the [examples directory](https://github.com/easylibs/streamer-sql/tree/master/easylibs-streamer-sql/src/example/java/org/easylibs/streamer/sql/example) in the repository.
+
