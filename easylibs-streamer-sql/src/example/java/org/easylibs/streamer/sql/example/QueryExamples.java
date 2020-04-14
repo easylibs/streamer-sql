@@ -17,8 +17,8 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SELECT 1 + 1;
-		 * 		-> 2
+		 *   sql> SELECT 1 + 1;
+		 *     -> 2
 		 * </pre>	
 		 * </code>
 		 */
@@ -29,7 +29,7 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SELECT AVG(score), t1.* FROM t1 ...;
+		 *   sql> SELECT AVG(score), t1.* FROM t1 ...;
 		 * </pre>	
 		 * </code>
 		 */
@@ -40,8 +40,8 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> CONCAT(last_name,', ',first_name) AS full_name
-		 * 			 FROM mytable ORDER BY full_name;
+		 *   sql> CONCAT(last_name,', ',first_name) AS full_name
+		 * 	      FROM mytable ORDER BY full_name;
 		 * </pre>	
 		 * </code>
 		 */
@@ -53,8 +53,8 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SELECT t1.name, t2.salary FROM employee AS t1, info AS t2
-		 * 			 WHERE t1.name = t2.name;
+		 *   sql> SELECT t1.name, t2.salary FROM employee AS t1, info AS t2
+		 *        WHERE t1.name = t2.name;
 		 * </pre>	
 		 * </code>
 		 */
@@ -66,7 +66,7 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SELECT a, b, COUNT(c) AS t FROM test_table GROUP BY a,b ORDER BY a,t DESC;
+		 *   sql> SELECT a, b, COUNT(c) AS t FROM test_table GROUP BY a,b ORDER BY a,t DESC;
 		 * </pre>	
 		 * </code>
 		 */
@@ -79,7 +79,7 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SELECT COUNT(col1) AS col2 FROM t GROUP BY col2 HAVING col2 = 2;
+		 *   sql> SELECT COUNT(col1) AS col2 FROM t GROUP BY col2 HAVING col2 = 2;
 		 * </pre>	
 		 * </code>
 		 */
@@ -92,7 +92,7 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SELECT * FROM tbl LIMIT 5,10;  # Retrieve rows 6-15
+		 *   sql> SELECT * FROM tbl LIMIT 5,10;  # Retrieve rows 6-15
 		 * </pre>	
 		 * </code>
 		 */
@@ -103,9 +103,9 @@ public class QueryExamples {
 		/**
 		 * <code>
 		 * <pre>
-		 * 		sql> SET @skip=1; SET @numrows=5;
-		 *			 PREPARE STMT FROM 'SELECT * FROM tbl LIMIT ?, ?';
-		 *			 EXECUTE STMT USING @skip, @numrows;
+		 *   sql> SET @skip=1; SET @numrows=5;
+		 *        PREPARE STMT FROM 'SELECT * FROM tbl LIMIT ?, ?';
+		 *        EXECUTE STMT USING @skip, @numrows;
 		 * </pre>	
 		 * </code>
 		 */
