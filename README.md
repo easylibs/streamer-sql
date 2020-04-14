@@ -4,7 +4,7 @@ Lightweight SQL to Java Stream API adaptor
 ## Examples
 First we setup a `SqlStreamer`:
 ```java
-final DataSource ds = ...; // Assume injected in someway
+final java.sql.DataSource ds = ...; // Assume injected in someway
 final SqlStreamer streamer = SqlStreamer.of(ds.getConnection());
 ```
 Next example shows, how to do a basic SQL query and process the results using a Java `Stream`. This example returns a single row, so only one line of output is produced, but of course as a stream its setup to handle any number of results.
