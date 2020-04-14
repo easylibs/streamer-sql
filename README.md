@@ -34,3 +34,25 @@ streamer.query("t1")
   .select("AVG(score)", "t1.*")
   .forEach(System.out::println);
 ```
+Lastly here is an example that shows how use a `PreparedStatement` query. The prepared statement can be reused over and over:
+SQL:
+```
+SET @skip=1; SET @numrows=5;
+PREPARE STMT FROM 'SELECT * FROM tbl LIMIT ?, ?';
+EXECUTE STMT USING @skip, @numrows;
+```
+Java:
+```java
+PreparedSqlQuery<Tuple> prepared = streamer.queryBuilder("tbl")
+  .limit("?", "?")
+  .build()
+  .prepare();
+```
+and now we use the prepared statement, supplying the values with `values(1, 5)` to replace all of the `?` in the query:
+```java
+prepared.values(1, 5)
+  .stream()
+  .forEach(System.out::println);
+```
+
+For more example please check the Wiki pages.
