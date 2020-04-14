@@ -25,6 +25,12 @@ package org.easylibs.streamer.sql;
 
 public interface PreparedSql<P extends PreparedSql<P>> {
 
+	/**
+	 * Replaces placeholder values in the prepared statement.
+	 *
+	 * @param values the values to replace each '?'
+	 * @return Prepared statement type
+	 */
 	P values(Object... values);
 
 }

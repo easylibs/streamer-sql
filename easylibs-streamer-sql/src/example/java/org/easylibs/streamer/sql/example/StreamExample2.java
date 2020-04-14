@@ -17,7 +17,7 @@ public class StreamExample2 {
 
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Persons");
 
-		PreparedSqlQuery.of(preparedStatement, PreparedStatement::executeQuery)
+		PreparedSqlQuery.of(preparedStatement)
 				.stream()
 				.collect(Collectors.toList());
 	}
