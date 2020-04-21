@@ -21,21 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.easylibs.streamer.sql;
+package org.easylibs.streamer.sql.function;
 
-import java.io.Closeable;
+import java.sql.SQLException;
 
-import org.easylibs.streamer.HasSql;
-
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * Complementary java runtime {@code Consumer} method which allows
+ * {@code SQLException} to be thrown.
+ * 
+ * @author Sly Technologies
+ * @author repos@slytechs.com
+ */
+public interface SqlBiConsumer<T, U> {
 
 	/**
-	 * Replaces placeholder values in the prepared statement.
+	 * Accept data and allow a {@link SQLException} to be thrown.
 	 *
-	 * @return Prepared statement type
+	 * @param t the first parameter
+	 * @param u the second parameter
+	 * @throws SQLException the SQL exception on any errors while consuming data
 	 */
-	P setNextValue(Object value);
-
-	P setValueAt(int index, Object value);
+	void accept(T t, U u) throws SQLException;
 
 }

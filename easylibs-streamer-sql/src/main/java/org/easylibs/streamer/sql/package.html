@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head></head>
+<body>
+	<p>Provides SQL Streamer services to JDBC operations.</p>
+
+	<p>A {@code SqlStreamer's} main function is to provide JDBC {@code
+		ResultSet} data as a standard java {@code Stream}. At the same
+		provides all standard JDBC operations so most application operations
+		are done using a consistant stream based API.</p>
+
+	<p>{@code SQL} statements are not completely replaced and you do
+		have understand the basics of SQL Syntax. However using the provided
+		java builder objects which chain multiple operations and validate your
+		input, make it much easier to code and then handle any resulting data.</p>
+
+	<p>This library does not load or create actual JDBC drivers and
+		make any JDBC connections. This has to be done by another framework or
+		using JDBC API.</p>
+
+	<h2>Getting Started</h2>
+
+	<p>The first thing we need to do is create a {@code SqlStreamer}
+		object. Before we can create a streamer we need a {@code
+		java.sql.Connection} to the database. This is done outside the
+		streamer API.</p>
+	<p>We use the factory method {@code
+		SqlStreamerSupport.streamer(Connection)} method to create a streamer
+		instance.</p>
+
+	Here is a quick demonstration, and note that the {@code
+	java.sql.DataSource} instance is already provided:
+	<code>
+		<pre>
+java.sql.Connection connection = dataSource.getConnection();
+SqlStreamer streamer = SqlStreamerSupport.streamer(connection);
+	</pre>
+	</code>
+
+
+	<h2>Query Example</h2>
+
+	<p>The {@code SqlStreamer.query()} invokes a SQL database query
+		which will generate a JDBC {@code ResultSet} that we will be able to
+		iterate over using java {@code Stream}:</p>
+	<code>
+		<pre>
+SqlStreamer streamer = SqlStreamerSupport.streamer(connection);
+
+streamer.query("table1")
+	.select("COUNT(`col1`) AS `col2`")
+	.groupBy("col2")
+	.having("`col2` = 2")
+	.forEach(System.out::println);
+	</pre>
+	</code>
+
+	<p>
+		The generated query looks something like this in SQL:
+		<code>
+			<pre>
+SELECT 
+	COUNT(`col1`) AS `col2`
+FROM 
+	`database1`.`table1` 
+GROUP BY 
+	`col2` 
+HAVING 
+	`col2` = 2;
+</pre>
+		</code>
+	<p>The first stream terminator method executes the query and starts
+		consuming rows from the stream which is backed by the {@code
+		ResultSet}. So the last statement {@code forEach(System.out::println)} will print 
+
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+

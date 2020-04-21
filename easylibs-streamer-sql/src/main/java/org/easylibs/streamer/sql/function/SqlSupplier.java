@@ -21,21 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.easylibs.streamer.sql;
+package org.easylibs.streamer.sql.function;
 
-import java.io.Closeable;
+import java.sql.SQLException;
 
-import org.easylibs.streamer.HasSql;
+/**
+ * 
+ * @author Sly Technologies
+ * @author repos@slytechs.com
+ */
+public interface SqlSupplier<T> {
 
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
-
-	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
-	 */
-	P setNextValue(Object value);
-
-	P setValueAt(int index, Object value);
-
+	T get() throws SQLException;
 }

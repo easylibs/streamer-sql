@@ -23,19 +23,39 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.io.Closeable;
-
 import org.easylibs.streamer.HasSql;
+import org.easylibs.streamer.builder.StreamerBuilder;
 
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+abstract class SqlBuilder<E extends Enum<E>, T> extends StreamerBuilder<E, T> implements HasSql {
 
 	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
+	 * 
 	 */
-	P setNextValue(Object value);
+	public SqlBuilder() {
+	}
 
-	P setValueAt(int index, Object value);
+	/**
+	 * @param link
+	 */
+	public SqlBuilder(StreamerBuilder<E, T> link) {
+		super(link);
+	}
+
+	/**
+	 * @see org.easylibs.streamer.builder.StreamerBuilder#buildSql()
+	 */
+	public abstract String buildSql();
+
+	/**
+	 * @see org.easylibs.streamer.sql.HasSql#toSql()
+	 */
+	@Override
+	public String toSql() {
+		return buildSql();
+	}
 
 }

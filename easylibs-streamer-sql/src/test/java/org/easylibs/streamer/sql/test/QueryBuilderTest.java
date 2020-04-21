@@ -12,12 +12,6 @@ class QueryBuilderTest {
 	@Test
 	void joinBuilder(SqlStreamer streamer) throws SQLException {
 
-		streamer.joinBuilder()
-				.where("id > 100")
-				.build()
-				.stream()
-				.collect(Collectors.toList());
-
 	}
 
 	@Test

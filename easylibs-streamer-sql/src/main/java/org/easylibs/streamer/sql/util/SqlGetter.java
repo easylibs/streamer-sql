@@ -21,21 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.easylibs.streamer.sql;
+package org.easylibs.streamer.sql.util;
 
-import java.io.Closeable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import org.easylibs.streamer.HasSql;
-
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * A getter interface suitable for lambda expressions that retrieves one or more
+ * values from a {@code ResultSet} row.
+ *
+ * @author Sly Technologies
+ * @author repos@slytechs.com
+ */
+public interface SqlGetter<T> {
 
 	/**
-	 * Replaces placeholder values in the prepared statement.
+	 * Reads data from column 1 from a java sql {@code ResultSet}.
 	 *
-	 * @return Prepared statement type
+	 * @param rs the result set
+	 * @return the read data, possibly as a Tuple or getter specific return type
+	 * @throws SQLException any SQL exceptions while reading data from the
+	 *                      {@code ResultSet}
 	 */
-	P setNextValue(Object value);
+	default T read(ResultSet rs) throws SQLException {
+		return read(1, rs);
+	}
 
-	P setValueAt(int index, Object value);
-
+	/**
+	 * Reads data for specified column froma java sql {@code ResultSet}.
+	 *
+	 * @param colIndex the column index
+	 * @param rs       the result set
+	 * @return the read data, possibly as a Tuple or getter specific return type
+	 * @throws SQLException any SQL exceptions while reading data from the
+	 *                      {@code ResultSet}
+	 */
+	T read(int colIndex, ResultSet rs) throws SQLException;
 }

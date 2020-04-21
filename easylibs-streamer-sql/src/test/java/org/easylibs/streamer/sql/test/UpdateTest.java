@@ -2,9 +2,9 @@ package org.easylibs.streamer.sql.test;
 
 import java.sql.SQLException;
 
+import org.easylibs.streamer.sql.PreparedSqlUpdate;
 import org.easylibs.streamer.sql.SqlDelete;
 import org.easylibs.streamer.sql.SqlInsert;
-import org.easylibs.streamer.sql.PreparedSqlUpdate;
 import org.easylibs.streamer.sql.SqlStreamer;
 import org.easylibs.streamer.sql.SqlUpdate;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ class UpdateTest {
 	@Test
 	void updateBuilder(SqlStreamer connection) throws SQLException {
 
-		SqlUpdate update = connection.updateBuilder("t1")
+		SqlUpdate update = connection.update("t1")
 				.set("col1 = col1 + 1", "col2 = col1")
 				.orderBy("id DESC")
 				.build();
@@ -25,19 +25,20 @@ class UpdateTest {
 	@Test
 	void updateBuilder_prepare(SqlStreamer connection) throws SQLException {
 
-		PreparedSqlUpdate prepared = connection.updateBuilder("items", "month")
+		PreparedSqlUpdate prepared = connection.update("items")
 				.set("col1 = ?", "col2 = ?")
 				.build()
 				.prepare();
 
-		prepared.values(1, 2).execute();
+		prepared.setNextValue(1).execute();
 	}
 
 	@Test
 	void insertBuilder(SqlStreamer connection) throws SQLException {
 
-		SqlInsert update = connection.insertBuilder("items", "a", "b", "c")
-				.values(1, 2, 3)
+		SqlInsert update = connection.insert("items")
+				.columns("a", "b", "c")
+				.repeat(1, 2, 3)
 				.values(4, 5, 6)
 				.values(7, 8, 9)
 				.build();
@@ -48,20 +49,21 @@ class UpdateTest {
 	@Test
 	void insertBuilder_prepare(SqlStreamer connection) throws SQLException {
 
-		PreparedSqlUpdate prepared = connection.insertBuilder("items", "a", "b", "c")
+		PreparedSqlUpdate prepared = connection.insert("items")
+				.columns("a", "b", "c")
 				.values("?", "?", "?")
 				.build()
-				.prepare();
+				.prepare(true);
 
-		prepared.values(1, 2, 3).execute();
-		prepared.values(4, 5, 6).execute();
-		prepared.values(7, 8, 9).execute();
+		prepared.setNextValue(1).execute();
+		prepared.setNextValue(4).execute();
+		prepared.setNextValue(7).execute();
 	}
 
 	@Test
 	void deleteBuilder(SqlStreamer connection) throws SQLException {
 
-		SqlDelete update = connection.deleteBuilder("items")
+		SqlDelete update = connection.delete("items")
 				.where("user = `jcole`")
 				.orderBy("timestampColumn")
 				.limit(1)
@@ -73,13 +75,13 @@ class UpdateTest {
 	@Test
 	void deleteBuilder_prepare(SqlStreamer connection) throws SQLException {
 
-		PreparedSqlUpdate prepared = connection.deleteBuilder("items")
+		PreparedSqlUpdate prepared = connection.delete("items")
 				.where("user = ?")
 				.orderBy("timestampColumn")
-				.values("jcole")
 				.build()
 				.prepare();
 
+		prepared.setNextValue("Joe");
 		prepared.execute();
 	}
 

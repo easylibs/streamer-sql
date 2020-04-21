@@ -23,19 +23,35 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.io.Closeable;
+import org.easylibs.streamer.sql.util.SqlUtils;
 
-import org.easylibs.streamer.HasSql;
-
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+class MysqlDialect extends BasicDialect {
 
 	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
+	 * 
 	 */
-	P setNextValue(Object value);
+	public MysqlDialect() {
+	}
 
-	P setValueAt(int index, Object value);
+	public String quoteValue(Object value) {
+		return String.valueOf(value);
+	}
+
+	/**
+	 * @see org.easylibs.streamer.sql.SqlDialect#quoteColumn(java.lang.String)
+	 */
+	@Override
+	public String quoteColumn(String column) {
+		return SqlUtils.bq(column);
+	}
+
+	@Override
+	public String quoteTable(String table) {
+		return SqlUtils.bq(table);
+	}
 
 }

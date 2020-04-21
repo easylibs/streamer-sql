@@ -23,21 +23,22 @@
  */
 package org.easylibs.streamer.sql;
 
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public interface SqlQueryStream<E> extends Stream<E> {
 
-	SqlQueryStream<E> select(String... args);
+	SqlQueryStream<E> select(String arg, String... args);
 
-	<U> SqlQueryStream<U> select(Class<U> type, String... args);
+	<U> SqlQueryStream<U> select(Class<U> type, String arg, String... args);
 
 	SqlQueryStream<E> where(String expression);
 
 	SqlQueryStream<E> having(String expression);
 
-	SqlQueryStream<E> groupBy(String... args);
+	SqlQueryStream<E> groupBy(String arg, String... args);
 
-	SqlQueryStream<E> orderBy(String... args);
+	SqlQueryStream<E> orderBy(String arg, String... args);
 
 	SqlQueryStream<E> limit(long limit);
 
@@ -50,5 +51,7 @@ public interface SqlQueryStream<E> extends Stream<E> {
 	SqlQueryStream<E> offset(long offset);
 
 	SqlQueryStream<E> offset(String offset);
+
+	SqlQueryStream<E> peekSql(Consumer<String> action);
 
 }

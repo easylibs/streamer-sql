@@ -23,19 +23,39 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.io.Closeable;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
-import org.easylibs.streamer.HasSql;
+import org.easylibs.streamer.sql.util.ResultSetSpliterator;
 
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+class PreparedQueryImpl<E> extends AbstractPrepared<PreparedSqlQuery<E>>
+		implements PreparedSqlQuery<E> {
+
+	public PreparedQueryImpl(PreparedStatement statement, String sql) {
+		super(statement, sql);
+	}
+
+	private ResultSet executeQuery() {
+		try {
+			return getStatement().executeQuery();
+		} catch (SQLException e) {
+			throw new StreamerSqlException(e);
+		}
+	}
 
 	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
+	 * @see org.easylibs.streamer.HasStream#stream()
 	 */
-	P setNextValue(Object value);
-
-	P setValueAt(int index, Object value);
+	@Override
+	public Stream<E> stream() {
+		return StreamSupport.stream(new ResultSetSpliterator<>(executeQuery()), false);
+	}
 
 }

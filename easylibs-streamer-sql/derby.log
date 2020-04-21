@@ -1,0 +1,19 @@
+----------------------------------------------------------------
+Tue Apr 21 16:30:11 EDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0171-9e6f-1089-00001b19e8a8 
+on database directory memory:/home/mark/git/LocalStreamerSql/easylibs-streamer-sql/SqlQueryTest with class loader sun.misc.Launcher$AppClassLoader@372f7a8d 
+Loaded from file:/home/mark/lib/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Private Build
+java.runtime.version=1.8.0_242-8u242-b08-0ubuntu3~18.04-b08
+user.dir=/home/mark/git/LocalStreamerSql/easylibs-streamer-sql
+os.name=Linux
+os.arch=amd64
+os.version=5.3.0-46-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Apr 21 16:30:11 EDT 2020: Shutting down Derby engine
+----------------------------------------------------------------
+Tue Apr 21 16:30:11 EDT 2020:
+Shutting down instance a816c00e-0171-9e6f-1089-00001b19e8a8 on database directory memory:/home/mark/git/LocalStreamerSql/easylibs-streamer-sql/SqlQueryTest with class loader sun.misc.Launcher$AppClassLoader@372f7a8d 
+----------------------------------------------------------------

@@ -23,21 +23,32 @@
  */
 package org.easylibs.streamer.sql;
 
-public interface SqlDelete {
+import java.io.Closeable;
+import java.util.function.Consumer;
 
-	public interface DeleteBuilder {
+public interface SqlDelete extends Closeable {
+
+	public interface Builder {
 
 		SqlDelete build();
 
-		DeleteBuilder limit(long limit);
+		default PreparedSqlUpdate prepare() {
+			return build().prepare();
+		}
 
-		DeleteBuilder limit(String limit);
+		default int execute() {
+			return build().execute();
+		}
 
-		DeleteBuilder orderBy(String orderBy);
+		Builder limit(long limit);
 
-		DeleteBuilder values(Object... values);
+		Builder limit(String limit);
 
-		DeleteBuilder where(String where);
+		Builder orderBy(String orderBy);
+
+		Builder where(String where);
+
+		Builder peekSql(Consumer<String> action);
 	}
 
 	PreparedSqlUpdate prepare();

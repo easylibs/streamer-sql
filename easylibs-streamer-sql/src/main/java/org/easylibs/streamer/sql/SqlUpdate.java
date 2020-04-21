@@ -23,22 +23,31 @@
  */
 package org.easylibs.streamer.sql;
 
+import java.util.function.Consumer;
+
+import org.easylibs.streamer.HasSql;
+
 public interface SqlUpdate {
 
-	public interface UpdateBuilder {
+	public interface Builder extends HasSql {
 
 		SqlUpdate build();
 
-		UpdateBuilder limit(long limit);
+		int execute();
 
-		UpdateBuilder limit(String limit);
+		PreparedSqlUpdate prepare();
 
-		UpdateBuilder orderBy(String orderBy);
+		Builder limit(long limit);
 
-		UpdateBuilder set(String expr, String... args);
+		Builder limit(String limit);
 
-		UpdateBuilder where(String where);
+		Builder orderBy(String orderBy);
 
+		Builder set(String arg, String... args);
+
+		Builder where(String where);
+
+		Builder peekSql(Consumer<String> action);
 	}
 
 	PreparedSqlUpdate prepare();

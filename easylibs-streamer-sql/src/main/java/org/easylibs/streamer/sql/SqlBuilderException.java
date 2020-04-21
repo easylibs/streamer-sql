@@ -23,19 +23,37 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.io.Closeable;
+import java.sql.SQLException;
 
-import org.easylibs.streamer.HasSql;
-
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+public class SqlBuilderException extends StreamerSqlException {
 
 	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
+	 * 
 	 */
-	P setNextValue(Object value);
+	private static final long serialVersionUID = -2223033545697132345L;
 
-	P setValueAt(int index, Object value);
+	public SqlBuilderException() {
+		super();
+	}
+
+	public SqlBuilderException(SQLException arg0) {
+		super(arg0);
+	}
+
+	public SqlBuilderException(String arg0, SQLException arg1, boolean arg2, boolean arg3) {
+		super(arg0, arg1, arg2, arg3);
+	}
+
+	public SqlBuilderException(String arg0, SQLException arg1) {
+		super(arg0, arg1);
+	}
+
+	public SqlBuilderException(String arg0) {
+		super(arg0);
+	}
 
 }

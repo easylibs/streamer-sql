@@ -25,17 +25,24 @@ package org.easylibs.streamer.sql;
 
 import java.io.Closeable;
 
-import org.easylibs.streamer.HasSql;
+public interface SqlCreateDatabase extends Closeable {
 
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+	public interface Builder {
 
-	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
-	 */
-	P setNextValue(Object value);
+		SqlCreateDatabase build();
 
-	P setValueAt(int index, Object value);
+		default PreparedSqlUpdate prepare() {
+			return build().prepare();
+		}
 
+		default int execute() {
+			return build().execute();
+		}
+
+		Builder ifNotExists();
+	}
+
+	PreparedSqlUpdate prepare();
+
+	int execute();
 }

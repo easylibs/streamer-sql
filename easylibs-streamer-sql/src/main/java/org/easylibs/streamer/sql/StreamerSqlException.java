@@ -23,11 +23,56 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public interface PreparedSqlAction {
+import org.easylibs.streamer.builder.StreamerException;
 
-	void accept(PreparedStatement t) throws SQLException;
-	
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+public class StreamerSqlException extends StreamerException {
+
+	private static final long serialVersionUID = 730259575580610546L;
+
+	public StreamerSqlException() {
+	}
+
+	/**
+	 * @param arg0
+	 */
+	public StreamerSqlException(SQLException arg0) {
+		super(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 */
+	public StreamerSqlException(String arg0) {
+		super(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 */
+	public StreamerSqlException(String arg0, SQLException arg1) {
+		super(arg0, arg1);
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * @param arg2
+	 * @param arg3
+	 */
+	public StreamerSqlException(String arg0, SQLException arg1, boolean arg2, boolean arg3) {
+		super(arg0, arg1, arg2, arg3);
+	}
+
+	@Override
+	public synchronized SQLException getCause() {
+		return (SQLException) super.getCause();
+	}
+
 }

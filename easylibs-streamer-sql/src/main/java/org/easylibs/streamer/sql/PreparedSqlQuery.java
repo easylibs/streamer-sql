@@ -25,16 +25,18 @@ package org.easylibs.streamer.sql;
 
 import java.sql.PreparedStatement;
 
+import org.easylibs.streamer.HasSql;
 import org.easylibs.streamer.HasStream;
+import org.easylibs.streamer.sql.function.SqlConsumer;
 import org.easylibs.streamer.tuple.Tuple;
 
-public interface PreparedSqlQuery<E> extends HasStream<E>, PreparedSql<PreparedSqlQuery<E>> {
+public interface PreparedSqlQuery<E> extends HasStream<E>, PreparedSql<PreparedSqlQuery<E>>, HasSql {
 
 	static PreparedSqlQuery<Tuple> of(PreparedStatement statement) {
 		return of(statement, PreparedStatement::executeQuery);
 	}
 
-	static PreparedSqlQuery<Tuple> of(PreparedStatement statement, PreparedSqlAction executeAction) {
+	static PreparedSqlQuery<Tuple> of(PreparedStatement statement, SqlConsumer<PreparedStatement> executeAction) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -24,43 +24,52 @@
 package org.easylibs.streamer.sql;
 
 import java.sql.SQLException;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
+import org.easylibs.streamer.HasSql;
 import org.easylibs.streamer.HasStream;
 
-public interface SqlQuery<E> extends HasStream<E> {
+public interface SqlQuery<E> extends HasStream<E>, HasSql {
 
-	public interface QueryBuilder<E> {
+	public interface Builder<E> extends HasSql {
 
-		<U> QueryBuilder<U> select(Class<U> type, String... args);
+		<U> Builder<U> select(Class<U> type, String arg, String... args);
 
-		QueryBuilder<E> select(String... args);
+		Builder<E> select(String arg, String... args);
 
-		QueryBuilder<E> where(String expression);
+		Builder<E> where(String expression);
 
-		QueryBuilder<E> having(String expression);
+		Builder<E> having(String expression);
 
-		QueryBuilder<E> groupBy(String... args);
+		Builder<E> groupBy(String arg, String... args);
 
-		QueryBuilder<E> orderBy(String... args);
+		Builder<E> orderBy(String arg, String... args);
 
-		QueryBuilder<E> limit(long limit);
+		Builder<E> limit(long limit);
 
-		QueryBuilder<E> limit(String limit);
+		Builder<E> limit(String limit);
 
-		QueryBuilder<E> limit(String offset, String limit);
+		Builder<E> limit(String offset, String limit);
 
-		QueryBuilder<E> limit(long offset, long limit);
+		Builder<E> limit(long offset, long limit);
 
-		QueryBuilder<E> offset(long offset);
+		Builder<E> offset(long offset);
 
-		QueryBuilder<E> offset(String offset);
+		Builder<E> offset(String offset);
+
+		Builder<E> distinct();
+
+		Builder<E> peekSql(Consumer<String> action);
 
 		SqlQuery<E> build() throws SQLException;
+
+		String toSql();
 
 	}
 
 	PreparedSqlQuery<E> prepare();
 
-	SqlQueryStream<E> stream();
+	Stream<E> stream();
 
 }

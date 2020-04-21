@@ -23,19 +23,24 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.io.Closeable;
+import org.easylibs.streamer.sql.SqlUpdate.Builder;
+import org.junit.jupiter.api.Test;
 
-import org.easylibs.streamer.HasSql;
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+class UpdateBuilderTests {
 
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+	@Test
+	void test() {
+		Builder builder = new UpdateBuilderImpl(null, "table1")
+				.set("`col1` = `col1` + 1", "`col2` = `col1`")
+				.orderBy("col1")
+				.limit(1)
+				.where("(`length` > 120)");
 
-	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
-	 */
-	P setNextValue(Object value);
-
-	P setValueAt(int index, Object value);
+		System.out.println(builder.toSql());
+	}
 
 }

@@ -23,8 +23,33 @@
  */
 package org.easylibs.streamer.sql;
 
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+
 public interface PreparedSqlUpdate extends PreparedSql<PreparedSqlUpdate> {
 
-	int execute();
-	
+	int execute() throws StreamerSqlException;
+
+	default <K> Stream<K> setValueAndExecute(Object value) throws StreamerSqlException {
+		return setNextValue(value).stream();
+	}
+
+	/**
+	 * Returns a stream of auto-generated keys from a prepared statement. If no
+	 * auto-generated keys/default values are returned, then an
+	 * {@link Stream#empty()} is returned.
+	 * <p>
+	 * Note you must specific {@code true} to {@link SqlInsert#prepare(boolean)}
+	 * method to request that JDBC return the auto-generated keys.
+	 * </p>
+	 *
+	 * @param <K> the key type
+	 * @return the stream
+	 */
+	<K> Stream<K> stream();
+
+	@SuppressWarnings("unchecked")
+	default <K> void forEach(Consumer<K> action) {
+		((Stream<K>) stream()).forEach(action);
+	}
 }

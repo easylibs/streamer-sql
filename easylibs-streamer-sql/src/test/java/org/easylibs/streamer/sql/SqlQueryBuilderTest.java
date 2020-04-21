@@ -23,19 +23,37 @@
  */
 package org.easylibs.streamer.sql;
 
-import java.io.Closeable;
+import java.sql.SQLException;
 
-import org.easylibs.streamer.HasSql;
+import org.easylibs.options.InvalidArgException;
+import org.easylibs.options.UnrecognizedArgException;
+import org.easylibs.streamer.tuple.Tuple;
+import org.junit.jupiter.api.Test;
 
-public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
+/**
+ * 
+ * @author Mark Bednarczyk [repo@slytechs.com]
+ */
+class SqlQueryBuilderTest {
 
-	/**
-	 * Replaces placeholder values in the prepared statement.
-	 *
-	 * @return Prepared statement type
-	 */
-	P setNextValue(Object value);
+	@Test
+	void QueryExamples_1() throws SQLException, UnrecognizedArgException, InvalidArgException {
 
-	P setValueAt(int index, Object value);
+		QueryBuilderImpl<Tuple> builder = new QueryBuilderImpl<Tuple>(null, "`t1`");
+
+		String sql = builder.select("1 + 1")
+//				.distinct()
+				.where("`col` < 20")
+				.groupBy("`col1`")
+				.having("`size` = 10")
+				.orderBy("col1 ASC", "col2 DESC")
+				.limit(300, 10)
+//				.offset(200)
+				.toSql();
+
+//		assertEquals("SELECT 1 + 1", sql);
+
+		System.out.println(sql);
+	}
 
 }
