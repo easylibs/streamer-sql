@@ -23,7 +23,6 @@
  */
 package org.easylibs.streamer.sql;
 
-import org.easylibs.streamer.HasSql;
 import org.easylibs.streamer.HasStream;
 
 public interface SqlJoin<E> extends HasStream<E> {

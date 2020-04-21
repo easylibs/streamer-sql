@@ -113,7 +113,7 @@ abstract class AbstractPrepared<P extends PreparedSql<P>> implements PreparedSql
 	}
 
 	/**
-	 * @see org.easylibs.streamer.HasSql#toSql()
+	 * @see org.easylibs.streamer.sql.HasSql#toSql()
 	 */
 	@Override
 	public String toSql() {

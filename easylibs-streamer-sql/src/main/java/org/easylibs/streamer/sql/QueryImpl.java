@@ -109,7 +109,7 @@ class QueryImpl<T> implements SqlQuery<T>, Closeable {
 	}
 
 	/**
-	 * @see org.easylibs.streamer.HasSql#toSql()
+	 * @see org.easylibs.streamer.sql.HasSql#toSql()
 	 */
 	@Override
 	public String toSql() {

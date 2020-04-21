@@ -23,38 +23,11 @@
  */
 package org.easylibs.streamer.sql;
 
-import org.easylibs.streamer.builder.StreamerBuilder;
-
 /**
  * 
  * @author Mark Bednarczyk [repo@slytechs.com]
  */
-abstract class SqlBuilder<E extends Enum<E>, T> extends StreamerBuilder<E, T> implements HasSql {
+public interface HasSql {
 
-	/**
-	 * 
-	 */
-	public SqlBuilder() {
-	}
-
-	/**
-	 * @param link
-	 */
-	public SqlBuilder(StreamerBuilder<E, T> link) {
-		super(link);
-	}
-
-	/**
-	 * @see org.easylibs.streamer.builder.StreamerBuilder#buildSql()
-	 */
-	public abstract String buildSql();
-
-	/**
-	 * @see org.org.easylibs.streamer.sql.HasSql#toSql()
-	 */
-	@Override
-	public String toSql() {
-		return buildSql();
-	}
-
+	public String toSql();
 }

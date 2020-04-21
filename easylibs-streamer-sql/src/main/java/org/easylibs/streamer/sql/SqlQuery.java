@@ -27,7 +27,6 @@ import java.sql.SQLException;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import org.easylibs.streamer.HasSql;
 import org.easylibs.streamer.HasStream;
 
 public interface SqlQuery<E> extends HasStream<E>, HasSql {

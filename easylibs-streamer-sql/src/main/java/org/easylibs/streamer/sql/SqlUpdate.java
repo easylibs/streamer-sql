@@ -25,8 +25,6 @@ package org.easylibs.streamer.sql;
 
 import java.util.function.Consumer;
 
-import org.easylibs.streamer.HasSql;
-
 public interface SqlUpdate {
 
 	public interface Builder extends HasSql {

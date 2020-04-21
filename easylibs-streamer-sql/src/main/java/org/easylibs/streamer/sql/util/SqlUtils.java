@@ -26,7 +26,6 @@ package org.easylibs.streamer.sql.util;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.function.Supplier;
 
 import org.easylibs.streamer.tuple.Tuple;
 
@@ -114,15 +113,6 @@ public class SqlUtils {
 			tuple.setLabel(i, label);
 
 		}
-
-		new Supplier() {
-
-			@Override
-			public Object get() {
-				throw new UnsupportedOperationException("Not implemented yet");
-
-			}
-		};
 
 		return tuple;
 	}

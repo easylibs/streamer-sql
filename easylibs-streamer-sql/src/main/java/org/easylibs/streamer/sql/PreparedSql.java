@@ -25,8 +25,6 @@ package org.easylibs.streamer.sql;
 
 import java.io.Closeable;
 
-import org.easylibs.streamer.HasSql;
-
 public interface PreparedSql<P extends PreparedSql<P>> extends HasSql, Closeable {
 
 	/**

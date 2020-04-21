@@ -25,7 +25,6 @@ package org.easylibs.streamer.sql;
 
 import java.sql.PreparedStatement;
 
-import org.easylibs.streamer.HasSql;
 import org.easylibs.streamer.HasStream;
 import org.easylibs.streamer.sql.function.SqlConsumer;
 import org.easylibs.streamer.tuple.Tuple;
