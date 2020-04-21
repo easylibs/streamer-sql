@@ -26,9 +26,9 @@ package org.easylibs.streamer.sql.function;
 import java.sql.SQLException;
 
 /**
- * Represents a supplier of results and allows SQL exception that. There is no
- * requirement that a new or distinct result be returned each time the supplier
- * is invoked.
+ * Represents a supplier of results and allows SQL exception to be raised. There
+ * is no requirement that a new or distinct result be returned each time the
+ * supplier is invoked.
  * 
  * This is a functional interface whose functional method is get().
  *
