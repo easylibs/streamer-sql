@@ -27,6 +27,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.easylibs.streamer.Streamer;
 import org.easylibs.streamer.sql.SqlDelete.Builder;
 import org.easylibs.streamer.sql.function.SqlBiConsumer;
 import org.easylibs.streamer.sql.function.SqlConsumer;
@@ -75,7 +76,7 @@ import org.easylibs.streamer.tuple.Tuple;
  * @author Sly Technologies
  * @author repos@slytechs.com
  */
-public class SqlStreamer {
+public class SqlStreamer implements Streamer {
 
 	private final Connection connection;
 

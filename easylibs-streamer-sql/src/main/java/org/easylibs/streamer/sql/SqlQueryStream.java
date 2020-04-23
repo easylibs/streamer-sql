@@ -26,32 +26,122 @@ package org.easylibs.streamer.sql;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+/**
+ * The Interface SqlQueryStream.
+ *
+ * @param <E> the element type
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
+ */
 public interface SqlQueryStream<E> extends Stream<E> {
 
+	/**
+	 * Select.
+	 *
+	 * @param arg  the arg
+	 * @param args the args
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> select(String arg, String... args);
 
+	/**
+	 * Select.
+	 *
+	 * @param <U>  the generic type
+	 * @param type the type
+	 * @param arg  the arg
+	 * @param args the args
+	 * @return the sql query stream
+	 */
 	<U> SqlQueryStream<U> select(Class<U> type, String arg, String... args);
 
+	/**
+	 * Where.
+	 *
+	 * @param expression the expression
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> where(String expression);
 
+	/**
+	 * Having.
+	 *
+	 * @param expression the expression
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> having(String expression);
 
+	/**
+	 * Group by.
+	 *
+	 * @param arg  the arg
+	 * @param args the args
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> groupBy(String arg, String... args);
 
+	/**
+	 * Order by.
+	 *
+	 * @param arg  the arg
+	 * @param args the args
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> orderBy(String arg, String... args);
 
+	/**
+	 * @see java.util.stream.Stream#limit(long)
+	 */
 	SqlQueryStream<E> limit(long limit);
 
+	/**
+	 * Limit.
+	 *
+	 * @param limit the limit
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> limit(String limit);
 
+	/**
+	 * Limit.
+	 *
+	 * @param offset the offset
+	 * @param limit  the limit
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> limit(String offset, String limit);
 
+	/**
+	 * Limit.
+	 *
+	 * @param offset the offset
+	 * @param limit  the limit
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> limit(long offset, long limit);
 
+	/**
+	 * Offset.
+	 *
+	 * @param offset the offset
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> offset(long offset);
 
+	/**
+	 * Offset.
+	 *
+	 * @param offset the offset
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> offset(String offset);
 
+	/**
+	 * Peek sql.
+	 *
+	 * @param action the action
+	 * @return the sql query stream
+	 */
 	SqlQueryStream<E> peekSql(Consumer<String> action);
 
 }

@@ -25,22 +25,69 @@ package org.easylibs.streamer.sql;
 
 import org.easylibs.streamer.HasStream;
 
+/**
+ * The Interface SqlJoin.
+ *
+ * @param <E> the element type
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
+ */
 public interface SqlJoin<E> extends HasStream<E> {
 
+	/**
+	 * The Interface Builder.
+	 *
+	 * @param <E> the element type
+	 */
 	public interface Builder<E> extends HasSql {
 
+		/**
+		 * Inner join on.
+		 *
+		 * @param tableReference     the table reference
+		 * @param joinTableReference the join table reference
+		 * @param searchcondition    the searchcondition
+		 * @return the builder
+		 */
 		Builder<E> innerJoinOn(String tableReference, String joinTableReference, String searchcondition);
 
+		/**
+		 * Inner join using.
+		 *
+		 * @param tableReference     the table reference
+		 * @param joinTableReference the join table reference
+		 * @param firstJoinColumn    the first join column
+		 * @param moreJoinColumns    the more join columns
+		 * @return the builder
+		 */
 		Builder<E> innerJoinUsing(String tableReference,
 				String joinTableReference,
 				String firstJoinColumn,
 				String... moreJoinColumns);
 
+		/**
+		 * Cross join using.
+		 *
+		 * @param tableReference     the table reference
+		 * @param joinTableReference the join table reference
+		 * @param firstJoinColumn    the first join column
+		 * @param moreJoinColumns    the more join columns
+		 * @return the builder
+		 */
 		Builder<E> crossJoinUsing(String tableReference,
 				String joinTableReference,
 				String firstJoinColumn,
 				String... moreJoinColumns);
 
+		/**
+		 * Join on.
+		 *
+		 * @param tableReference     the table reference
+		 * @param joinTableReference the join table reference
+		 * @param firstJoinColumn    the first join column
+		 * @param moreJoinColumns    the more join columns
+		 * @return the builder
+		 */
 		Builder<E> joinOn(String tableReference,
 				String joinTableReference,
 				String firstJoinColumn,
@@ -48,6 +95,11 @@ public interface SqlJoin<E> extends HasStream<E> {
 
 	}
 
+	/**
+	 * Prepare.
+	 *
+	 * @return the prepared sql query
+	 */
 	PreparedSqlQuery<E> prepare();
 
 }

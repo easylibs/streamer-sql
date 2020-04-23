@@ -30,7 +30,8 @@ import java.sql.Statement;
 
 /**
  * 
- * @author Mark Bednarczyk [repo@slytechs.com]
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
  */
 class UpdateImpl implements SqlUpdate, Closeable {
 

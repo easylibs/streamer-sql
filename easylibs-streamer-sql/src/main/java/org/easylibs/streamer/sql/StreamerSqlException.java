@@ -29,7 +29,8 @@ import org.easylibs.streamer.builder.StreamerException;
 
 /**
  * 
- * @author Mark Bednarczyk [repo@slytechs.com]
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
  */
 public class StreamerSqlException extends StreamerException {
 

@@ -25,30 +25,101 @@ package org.easylibs.streamer.sql;
 
 import java.util.function.Consumer;
 
+/**
+ * The Interface SqlUpdate.
+ * 
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
+ */
 public interface SqlUpdate {
 
+	/**
+	 * The Interface Builder.
+	 */
 	public interface Builder extends HasSql {
 
+		/**
+		 * Builds the.
+		 *
+		 * @return the sql update
+		 */
 		SqlUpdate build();
 
+		/**
+		 * Execute.
+		 *
+		 * @return the int
+		 */
 		int execute();
 
+		/**
+		 * Prepare.
+		 *
+		 * @return the prepared sql update
+		 */
 		PreparedSqlUpdate prepare();
 
+		/**
+		 * Limit.
+		 *
+		 * @param limit the limit
+		 * @return the builder
+		 */
 		Builder limit(long limit);
 
+		/**
+		 * Limit.
+		 *
+		 * @param limit the limit
+		 * @return the builder
+		 */
 		Builder limit(String limit);
 
+		/**
+		 * Order by.
+		 *
+		 * @param orderBy the order by
+		 * @return the builder
+		 */
 		Builder orderBy(String orderBy);
 
+		/**
+		 * Sets the.
+		 *
+		 * @param arg  the arg
+		 * @param args the args
+		 * @return the builder
+		 */
 		Builder set(String arg, String... args);
 
+		/**
+		 * Where.
+		 *
+		 * @param where the where
+		 * @return the builder
+		 */
 		Builder where(String where);
 
+		/**
+		 * Peek sql.
+		 *
+		 * @param action the action
+		 * @return the builder
+		 */
 		Builder peekSql(Consumer<String> action);
 	}
 
+	/**
+	 * Prepare.
+	 *
+	 * @return the prepared sql update
+	 */
 	PreparedSqlUpdate prepare();
 
+	/**
+	 * Execute.
+	 *
+	 * @return the int
+	 */
 	int execute();
 }

@@ -32,8 +32,10 @@ import org.easylibs.streamer.sql.SqlUpdate.Builder;
 import org.easylibs.streamer.sql.util.SqlUtils;
 
 /**
- * 
- * @author Mark Bednarczyk [repo@slytechs.com]
+ * The Class UpdateBuilderImpl.
+ *
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
  */
 class UpdateBuilderImpl extends SqlBuilder<UpdateBuilderImpl.Keyword, SqlUpdate>
 		implements Builder {
