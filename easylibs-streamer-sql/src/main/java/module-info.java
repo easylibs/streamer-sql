@@ -21,59 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.easylibs.streamer.sql;
-
-import java.sql.SQLException;
-
-import org.easylibs.streamer.builder.StreamerException;
-
 /**
- * 
- * @author Sly Technologies Inc
- * @author repos@slytechs.com
+ * @author mark
+ *
  */
-public class StreamerSqlException extends StreamerException {
+module org.easylibs.streamer.sql {
+	exports org.easylibs.streamer.sql.function;
+	exports org.easylibs.streamer.sql.util;
 
-	private static final long serialVersionUID = 730259575580610546L;
-
-	public StreamerSqlException() {
-	}
-
-	/**
-	 * @param arg0
-	 */
-	public StreamerSqlException(SQLException arg0) {
-		super(arg0);
-	}
-
-	/**
-	 * @param arg0
-	 */
-	public StreamerSqlException(String arg0) {
-		super(arg0);
-	}
-
-	/**
-	 * @param arg0
-	 * @param arg1
-	 */
-	public StreamerSqlException(String arg0, SQLException arg1) {
-		super(arg0, arg1);
-	}
-
-	/**
-	 * @param arg0
-	 * @param arg1
-	 * @param arg2
-	 * @param arg3
-	 */
-	public StreamerSqlException(String arg0, SQLException arg1, boolean arg2, boolean arg3) {
-		super(arg0, arg1, arg2, arg3);
-	}
-
-	@Override
-	public synchronized SQLException getCause() {
-		return (SQLException) super.getCause();
-	}
-
+	requires easylibs.options;
+	requires java.logging;
+	requires java.naming;
+	requires java.sql;
+	requires mysql.connector.java;
+	requires org.easylibs.streamer;
 }

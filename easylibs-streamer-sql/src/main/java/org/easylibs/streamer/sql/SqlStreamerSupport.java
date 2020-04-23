@@ -37,7 +37,7 @@ import org.easylibs.streamer.tuple.Tuple;
  * Support class providing factory methods for creation of {@link SqlStreamer}
  * and other related objects.
  * 
- * @author Sly Technologies
+ * @author Sly Technologies Inc
  * @author repos@slytechs.com
  */
 public final class SqlStreamerSupport {

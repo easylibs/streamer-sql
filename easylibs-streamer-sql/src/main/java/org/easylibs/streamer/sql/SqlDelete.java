@@ -26,32 +26,96 @@ package org.easylibs.streamer.sql;
 import java.io.Closeable;
 import java.util.function.Consumer;
 
+/**
+ * The Interface SqlDelete.
+ * 
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
+ */
 public interface SqlDelete extends Closeable {
 
+	/**
+	 * The Interface Builder.
+	 */
 	public interface Builder {
 
+		/**
+		 * Builds the.
+		 *
+		 * @return the sql delete
+		 */
 		SqlDelete build();
 
+		/**
+		 * Prepare.
+		 *
+		 * @return the prepared sql update
+		 */
 		default PreparedSqlUpdate prepare() {
 			return build().prepare();
 		}
 
+		/**
+		 * Execute.
+		 *
+		 * @return the int
+		 */
 		default int execute() {
 			return build().execute();
 		}
 
+		/**
+		 * Limit.
+		 *
+		 * @param limit the limit
+		 * @return the builder
+		 */
 		Builder limit(long limit);
 
+		/**
+		 * Limit.
+		 *
+		 * @param limit the limit
+		 * @return the builder
+		 */
 		Builder limit(String limit);
 
+		/**
+		 * Order by.
+		 *
+		 * @param orderBy the order by
+		 * @return the builder
+		 */
 		Builder orderBy(String orderBy);
 
+		/**
+		 * Where.
+		 *
+		 * @param where the where
+		 * @return the builder
+		 */
 		Builder where(String where);
 
+		/**
+		 * Peek sql.
+		 *
+		 * @param action the action
+		 * @return the builder
+		 */
 		Builder peekSql(Consumer<String> action);
 	}
 
+	/**
+	 * Prepare.
+	 *
+	 * @return the prepared sql update
+	 */
 	PreparedSqlUpdate prepare();
 
+	/**
+	 * Execute.
+	 *
+	 * @return the int
+	 */
 	int execute();
 }

@@ -24,8 +24,10 @@
 package org.easylibs.streamer.sql;
 
 /**
- * 
- * @author Mark Bednarczyk [repo@slytechs.com]
+ * The Interface SqlDialect.
+ *
+ * @author Sly Technologies Inc
+ * @author repos@slytechs.com
  */
 public interface SqlDialect {
 
